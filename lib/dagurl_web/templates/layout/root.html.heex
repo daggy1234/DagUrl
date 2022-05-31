@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
+    <%= live_title_tag assigns[:page_title] || "Dagurl", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+  </head>
+  <body>
+    <header>
+      <section>
+        <nav class="navbar p-4 bg-base-100">
+          <div class="flex-1">
+            <h1 class="text-4xl ml-10">DagUrl</h1>
+          </div>
+          <div class="flex-none">
+          <ul class="menu menu-horizontal p-0">
+            <li tabindex="0"><a class="text-xl" href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <li class="text-xl"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+            <% end %>
+            </ul>
+              <div class="m-5">
+                  🌞
+                  <div class="inline-block w-10">
+                    <span data-toggle-theme="night,winter" data-act-class="pl-4" class="border rounded-full flex items-center cursor-pointer w-10 transition-all duration-300 ease-in-out pl-0">
+                      <span class="rounded-full w-3 night:w-10 h-3 m-1 bg-green-700">
+                      </span>
+                    </span>
+                  </div>
+                  🌚
+                </div>
+        </div>
+        </nav>
+        <a href="https://phoenixframework.org/" class="phx-logo">
+          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
+        </a>
+      </section>
+    </header>
+    <%= @inner_content %>
+  </body>
+</html>
